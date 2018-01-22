@@ -72,4 +72,4 @@ for pg in quote_page:
 
 appended_df = pd.concat(appended_df, axis=0)
 # write DataFrame to an excel sheet 
-appended_df.reset_index().to_excel('All Apps.xlsx')
+appended_df.reset_index(drop=True).to_excel('All Apps.xlsx')
