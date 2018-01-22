@@ -71,5 +71,22 @@ for pg in quote_page:
     appended_df.append(df)
 
 appended_df = pd.concat(appended_df, axis=0)
+# To reset index column
+appended_df = appended_df.reset_index(drop=True)
+
+# Long Description
+# Unorganized
+source = 'https://apps.smarthealthit.org'
+
+data = []
+for abbr in appended_df['pg.abbr']:
+    app_url = source + abbr
+    app_pg = urlopen(app_url)
+    app_soup = BeautifulSoup(app_pg,"html.parser")
+    data.append(app_soup.find_all('div', attrs={'class': '_3tpF_'})[0].text)
+    
+appended_df['Long Description'] = data
+
 # write DataFrame to an excel sheet 
-appended_df.reset_index(drop=True).to_excel('All Apps.xlsx')
+appended_df.to_excel('All Apps.xlsx')
+
