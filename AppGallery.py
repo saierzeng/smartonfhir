@@ -25,11 +25,18 @@ df = pd.DataFrame(data)
 df.columns = ['App']
   
 data = []  
-for comp_box in soup.find_all('h4', attrs={'class': 'Hk23d'}):
-    comp = comp_box.text.strip()
-    print(comp)
-    data.append(comp)
+for name_box in soup.find_all('h4', attrs={'class': 'Hk23d'}):
+    name = name_box.text.strip()
+    print(name)
+    data.append(name)
 df['Company'] = data
+
+data = []  
+for name_box in soup.find_all('p', attrs={'class': '_2J297'}):
+    name = name_box.text.strip()
+    print(name)
+    data.append(name)
+df['ShortDesc'] = data
 
 
 
